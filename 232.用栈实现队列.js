@@ -2,7 +2,7 @@
  * @Author: mrlthf11
  * @LastEditors: mrlthf11
  * @Date: 2021-01-21 09:37:52
- * @LastEditTime: 2021-01-21 10:31:11
+ * @LastEditTime: 2021-01-21 10:53:59
  * @Description: file content
  */
 /*
@@ -35,9 +35,10 @@ MyQueue.prototype.push = function (x) {
  */
 MyQueue.prototype.pop = function () {
   if (this.outputStack.length === 0) {
-    while (this.inputStack.length) {
+    while (this.inputStack.length > 1) {
       this.outputStack.push(this.inputStack.pop())
     }
+    return this.inputStack.pop()
   }
   return this.outputStack.pop()
 };
