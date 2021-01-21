@@ -2,7 +2,7 @@
  * @Author: mrlthf11
  * @LastEditors: mrlthf11
  * @Date: 2021-01-21 09:37:52
- * @LastEditTime: 2021-01-21 10:53:59
+ * @LastEditTime: 2021-01-21 12:34:28
  * @Description: file content
  */
 /*
@@ -48,9 +48,12 @@ MyQueue.prototype.pop = function () {
  * @return {number}
  */
 MyQueue.prototype.peek = function () {
-  return this.outputStack.length
-    ? this.outputStack[this.outputStack.length - 1]
-    : this.inputStack[0]
+  if (this.outputStack.length === 0) {
+    while (this.inputStack.length) {
+      this.outputStack.push(this.inputStack.pop())
+    }
+  }
+  return this.outputStack[this.outputStack.length - 1]
 };
 
 /**
