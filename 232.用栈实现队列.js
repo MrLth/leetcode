@@ -2,7 +2,7 @@
  * @Author: mrlthf11
  * @LastEditors: mrlthf11
  * @Date: 2021-01-21 09:37:52
- * @LastEditTime: 2021-01-21 10:02:45
+ * @LastEditTime: 2021-01-21 10:31:11
  * @Description: file content
  */
 /*
@@ -16,17 +16,17 @@
  * Initialize your data structure here.
  */
 var MyQueue = function () {
-  this._stack1 = []
-  this._stack2 = []
+  this.inputStack = []
+  this.outputStack = []
 };
 
 /**
- * Push element x to the back of queue.
+ * Push element x to the back of queue
  * @param {number} x
  * @return {void}
  */
 MyQueue.prototype.push = function (x) {
-  this._stack1.push(x)
+  this.inputStack.push(x)
 };
 
 /**
@@ -34,12 +34,12 @@ MyQueue.prototype.push = function (x) {
  * @return {number}
  */
 MyQueue.prototype.pop = function () {
-  if (this._stack2.length === 0) {
-    while (this._stack1.length) {
-      this._stack2.push(this._stack1.pop())
+  if (this.outputStack.length === 0) {
+    while (this.inputStack.length) {
+      this.outputStack.push(this.inputStack.pop())
     }
   }
-  return this._stack2.pop()
+  return this.outputStack.pop()
 };
 
 /**
@@ -47,12 +47,9 @@ MyQueue.prototype.pop = function () {
  * @return {number}
  */
 MyQueue.prototype.peek = function () {
-  if (this._stack2.length === 0) {
-    while (this._stack1.length) {
-      this._stack2.push(this._stack1.pop())
-    }
-  }
-  return this._stack2[this._stack2.length - 1]
+  return this.outputStack.length
+    ? this.outputStack[this.outputStack.length - 1]
+    : this.inputStack[0]
 };
 
 /**
@@ -60,7 +57,7 @@ MyQueue.prototype.peek = function () {
  * @return {boolean}
  */
 MyQueue.prototype.empty = function () {
-  return this._stack2.length + this._stack1.length === 0
+  return !this.outputStack.length && !this.inputStack.length
 };
 
 /**
